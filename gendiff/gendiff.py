@@ -51,4 +51,4 @@ def generate_diff(file_path1: str, file_path2: str) -> str:
             result += stringify({key: file1[key]}, '  - ')
             result += stringify({key: file2[key]}, '  + ')
 
-    return result
+    return '{\n' + result + '}'
