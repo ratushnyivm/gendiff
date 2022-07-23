@@ -1,5 +1,6 @@
 import itertools
 import json
+import os
 
 
 def stringify(value, replacer=' ', spaces_count=1):
@@ -21,7 +22,7 @@ def stringify(value, replacer=' ', spaces_count=1):
 
 
 def json_to_dict(path: str) -> dict:
-    with open(path) as fp:
+    with open(os.path.abspath(path)) as fp:
         result = json.load(fp)
 
     # decoding from python to json: true, false и null
