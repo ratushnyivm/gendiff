@@ -1,6 +1,7 @@
 import itertools
 import json
 import os
+import yaml
 
 
 def stringify(value, replacer=' ', spaces_count=1):
@@ -35,9 +36,27 @@ def json_to_dict(path: str) -> dict:
     return result
 
 
+def extract_data(path: str) -> dict:
+    absolute_path = os.path.abspath(path)
+
+    with open(absolute_path) as import_file:
+        if absolute_path.endswith('.yml') or absolute_path.endswith('.yaml'):
+            result = yaml.safe_load(import_file)
+        elif absolute_path.endswith('.json'):
+            result = json.load(import_file)
+
+    for key, value in result.items():
+        if type(value) is bool:
+            result[key] = str(value).lower()
+        elif value is None:
+            result[key] = 'null'
+
+    return result
+
+
 def generate_diff(file_path1: str, file_path2: str) -> str:
-    file1 = json_to_dict(file_path1)
-    file2 = json_to_dict(file_path2)
+    file1 = extract_data(file_path1)
+    file2 = extract_data(file_path2)
     result = ''
     keys = file1.keys() | file2.keys()
 
