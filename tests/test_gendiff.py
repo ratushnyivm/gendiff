@@ -15,9 +15,19 @@ result_gendiff = """{
   + verbose: true
 }"""
 
-path_file1 = 'tests/fixtures/file1.json'
-path_file2 = 'tests/fixtures/file2.json'
+path_file1_json = 'tests/fixtures/file1.json'
+path_file2_json = 'tests/fixtures/file2.json'
 
 
-def test_generate_diff():
-    assert generate_diff(path_file1, path_file2) == result_gendiff
+def test_generate_diff_json():
+    assert generate_diff(path_file1_json, path_file2_json) ==\
+           result_gendiff
+
+
+path_file1_yml = 'tests/fixtures/file1.yml'
+path_file2_yml = 'tests/fixtures/file2.yml'
+
+
+def test_generate_diff_yml():
+    assert generate_diff(path_file1_yml, path_file2_yml) ==\
+           result_gendiff
