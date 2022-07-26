@@ -22,20 +22,6 @@ def stringify(value, replacer=' ', spaces_count=1):
     return iter_(value, 0)
 
 
-def json_to_dict(path: str) -> dict:
-    with open(os.path.abspath(path)) as fp:
-        result = json.load(fp)
-
-    # decoding from python to json: true, false и null
-    for key, value in result.items():
-        if type(value) is bool:
-            result[key] = str(value).lower()
-        elif value is None:
-            result[key] = 'null'
-
-    return result
-
-
 def extract_data(path: str) -> dict:
     absolute_path = os.path.abspath(path)
 
