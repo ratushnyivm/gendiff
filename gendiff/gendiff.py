@@ -1,25 +1,7 @@
-import itertools
 import json
 import os
 import yaml
-
-
-def stringify(value, replacer=' ', spaces_count=1):
-
-    def iter_(current_value, depth):
-        if not isinstance(current_value, dict):
-            return str(current_value)
-
-        deep_indent_size = depth + spaces_count
-        deep_indent = replacer * deep_indent_size
-        current_indent = replacer * depth
-        lines = []
-        for key, val in current_value.items():
-            lines.append(f'{deep_indent}{key}: {iter_(val, deep_indent_size)}')
-        result = itertools.chain(lines, current_indent, '\n')
-        return ''.join(result)
-
-    return iter_(value, 0)
+from gendiff.output_views.stylish import stylish_render
 
 
 def extract_data(path: str) -> dict:
@@ -31,30 +13,77 @@ def extract_data(path: str) -> dict:
         elif absolute_path.endswith('.json'):
             result = json.load(import_file)
 
-    for key, value in result.items():
-        if type(value) is bool:
-            result[key] = str(value).lower()
-        elif value is None:
-            result[key] = 'null'
+    return result
+
+
+def make_diff(file1: dict, file2: dict) -> dict:
+    keys = file1.keys() | file2.keys()
+    result = {}
+
+    for key in keys:
+        # КЛЮЧ ОТСУТСТВУЕТ В ПЕРВОМ ФАЙЛЕ И ПРИСУТСТВУЕТ ВО ВТОРОМ
+        if key not in file1:
+            result[key] = {
+                'status': 'added',
+                'value': file2.get(key)
+            }
+        # КЛЮЧ ПРИСУТСТВУЕТ В ПЕРВОМ ФАЙЛЕ И ОТСУТСТВУЕТТ ВО ВТОРОМ
+        elif key not in file2:
+
+            result[key] = {
+                'status': 'deleted',
+                'value': file1.get(key)
+            }
+
+        # ПАРЫ КЛЮЧ/ЗНАЧЕНИЯ ОДИНАКОВЫ В ОБОИХ ФАЙЛАХ
+        elif file1[key] == file2[key]:
+
+            if isinstance(file1[key], dict) and \
+                    isinstance(file2[key], dict):
+
+                result[key] = {
+                    'status': 'unchanged',
+                    'value': make_diff(file1[key], file2[key])
+                }
+
+            else:
+                result[key] = {
+                    'status': 'unchanged',
+                    'value': file1.get(key)
+                }
+        # КЛЮЧ ПРИСУТСТВУЕТ В ОБОИХ ФАЙЛАХ, ЗНАЧЕНИЯ ОТЛИЧАЮТСЯ
+        else:
+            # ЗНАЧЕНИЯ В ОБОИХ ФАЙЛАХ ЯВЛЯЮТСЯ СЛОВАРЯМИ
+            if isinstance(file1[key], dict) and \
+                    isinstance(file2[key], dict):
+                result[key] = {
+                    'status': 'changed',
+                    'value': make_diff(file1[key], file2[key])
+                }
+            else:
+                result[key] = {
+                    'status': 'changed',
+                    'old_value': file1[key],
+                    'new_value': file2[key]
+                }
 
     return result
 
 
-def generate_diff(file_path1: str, file_path2: str) -> str:
-    file1 = extract_data(file_path1)
-    file2 = extract_data(file_path2)
-    result = ''
-    keys = file1.keys() | file2.keys()
+def generate_diff(
+        file_path1: str,
+        file_path2: str,
+        format_name: str = 'stylish'
+):
 
-    for key in sorted(keys):
-        if key not in file1:
-            result += stringify({key: file2[key]}, '  + ')
-        elif key not in file2:
-            result += stringify({key: file1[key]}, '  - ')
-        elif file1[key] == file2[key]:
-            result += stringify({key: file1[key]}, '    ')
-        else:
-            result += stringify({key: file1[key]}, '  - ')
-            result += stringify({key: file2[key]}, '  + ')
+    file_data1, file_data2 = extract_data(file_path1), extract_data(file_path2)
+    data_diff = make_diff(file_data1, file_data2)
 
-    return '{\n' + result + '}'
+    if format_name == 'stylish':
+        return stylish_render(data_diff)
+    elif format_name == 'plain':
+        return 'plain'
+    elif format_name == 'json':
+        return 'json'
+
+    return None
