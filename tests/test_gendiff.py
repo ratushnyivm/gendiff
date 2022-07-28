@@ -1,3 +1,4 @@
+from gendiff.gendiff import extract_data
 from gendiff import generate_diff  # noqa
 
 
@@ -62,3 +63,38 @@ path_file2_yml = 'tests/fixtures/file2.yaml'
 def test_generate_diff_yml():
     assert generate_diff(path_file1_yml, path_file2_yml) ==\
            result_gendiff
+
+
+file_data1 = {
+    'common': {
+        'setting1': 'Value 1',
+        'setting2': 200,
+        'setting3': True,
+        'setting6': {
+            'key': 'value',
+            'doge': {
+                'wow': ''
+            }
+        }
+    },
+    'group1': {
+        'baz': 'bas',
+        'foo': 'bar',
+        'nest': {
+            'key': 'value'
+        }
+    },
+    'group2': {
+        'abc': 12345,
+        'deep': {
+            'id': 45
+        }
+    }
+}
+
+
+def test_extract_data():
+    assert extract_data(path_file1_json) == file_data1
+    assert extract_data(path_file1_yml) == file_data1
+    assert extract_data(path_file1_json) == extract_data(path_file1_yml)
+    assert extract_data(path_file2_json) == extract_data(path_file2_yml)
