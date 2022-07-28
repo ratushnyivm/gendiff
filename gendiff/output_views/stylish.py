@@ -42,7 +42,8 @@ def stylish_render(file: dict):
                     f"{iter_(value.get('value'), deep_indent_size)}"
                 )
 
-            elif value.get('old_value') or value.get('new_value'):
+            elif value.get('old_value') or value.get('new_value') \
+                    or value.get('status') == 'changed':
                 lines.append(
                     f"{deep_indent}"
                     f"{condition['deleted']}"
