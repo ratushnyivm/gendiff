@@ -55,10 +55,10 @@ def test_generate_diff_json():
            result_gendiff
 
 
-path_file1_yml = 'tests/fixtures/file1.yml'
-path_file2_yml = 'tests/fixtures/file2.yml'
+path_file1_yml = 'tests/fixtures/file1.yaml'
+path_file2_yml = 'tests/fixtures/file2.yaml'
 
 
-"""def test_generate_diff_yml():
+def test_generate_diff_yml():
     assert generate_diff(path_file1_yml, path_file2_yml) ==\
-           result_gendiff"""
+           result_gendiff
