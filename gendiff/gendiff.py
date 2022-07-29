@@ -1,7 +1,8 @@
 import json
 import os
 import yaml
-from gendiff.output_views.stylish import stylish_render
+from gendiff.output_views.stylish import stylish_output
+from gendiff.output_views.json import json_output
 
 
 def extract_data(path: str) -> dict:
@@ -80,10 +81,10 @@ def generate_diff(
     data_diff = make_diff(file_data1, file_data2)
 
     if format_name == 'stylish':
-        return stylish_render(data_diff)
+        return stylish_output(data_diff)
     elif format_name == 'plain':
         return 'plain'
     elif format_name == 'json':
-        return 'json'
+        return json_output(data_diff)
 
     return None
