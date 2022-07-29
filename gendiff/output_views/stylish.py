@@ -2,7 +2,7 @@ from collections import OrderedDict
 import itertools
 
 
-def stylish_render(file: dict):
+def stylish_output(file: dict):
 
     def iter_(value, depth):
 
