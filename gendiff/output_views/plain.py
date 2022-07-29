@@ -5,7 +5,8 @@ def plain_output(file: dict):
     def iter_(value, path):
 
         if not isinstance(value, dict):
-            if isinstance(value, bool) or value is None:
+            if isinstance(value, bool) or isinstance(value, int) \
+                    or value is None:
                 return str(value)
             else:
                 return f"'{str(value)}'"
