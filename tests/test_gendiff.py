@@ -2,70 +2,19 @@ from gendiff.gendiff import extract_data
 from gendiff import generate_diff  # noqa
 
 
-result_gendiff = """{
-    common: {
-      + follow: false
-        setting1: Value 1
-      - setting2: 200
-      - setting3: true
-      + setting3: null
-      + setting4: blah blah
-      + setting5: {
-            key5: value5
-        }
-        setting6: {
-            doge: {
-              - wow: 
-              + wow: so much
-            }
-            key: value
-          + ops: vops
-        }
-    }
-    group1: {
-      - baz: bas
-      + baz: bars
-        foo: bar
-      - nest: {
-            key: value
-        }
-      + nest: str
-    }
-  - group2: {
-        abc: 12345
-        deep: {
-            id: 45
-        }
-    }
-  + group3: {
-        deep: {
-            id: {
-                number: 45
-            }
-        }
-        fee: 100500
-    }
-}"""
+STYLISH = 'stylish'
+PLAIN = 'plain'
+JSON = 'json'
 
-path_file1_json = 'tests/fixtures/file1.json'
-path_file2_json = 'tests/fixtures/file2.json'
+PATH_FILE1_JSON = 'tests/fixtures/file1.json'
+PATH_FILE2_JSON = 'tests/fixtures/file2.json'
+PATH_FILE1_YML = 'tests/fixtures/file1.yml'
+PATH_FILE2_YML = 'tests/fixtures/file2.yml'
 
+PATH_RESULT_STYLISH = 'tests/fixtures/result_stylish'
+PATH_RESULT_PLAIN = 'tests/fixtures/result_plain'
 
-def test_generate_diff_json():
-    assert generate_diff(path_file1_json, path_file2_json) ==\
-           result_gendiff
-
-
-path_file1_yml = 'tests/fixtures/file1.yaml'
-path_file2_yml = 'tests/fixtures/file2.yaml'
-
-
-def test_generate_diff_yml():
-    assert generate_diff(path_file1_yml, path_file2_yml) ==\
-           result_gendiff
-
-
-file_data1 = {
+extract_result = {
     'common': {
         'setting1': 'Value 1',
         'setting2': 200,
@@ -94,7 +43,30 @@ file_data1 = {
 
 
 def test_extract_data():
-    assert extract_data(path_file1_json) == file_data1
-    assert extract_data(path_file1_yml) == file_data1
-    assert extract_data(path_file1_json) == extract_data(path_file1_yml)
-    assert extract_data(path_file2_json) == extract_data(path_file2_yml)
+    assert type(extract_data(PATH_FILE1_JSON)) == dict
+    assert type(extract_data(PATH_FILE1_YML)) == dict
+    assert extract_data(PATH_FILE1_JSON) == extract_result
+    assert extract_data(PATH_FILE1_YML) == extract_result
+
+
+def test_generate_diff():
+
+    with open(PATH_RESULT_STYLISH) as f:
+        result_stylish = f.read()
+    with open(PATH_RESULT_PLAIN) as f:
+        result_plain = f.read()
+
+    assert result_stylish == \
+        generate_diff(PATH_FILE1_JSON, PATH_FILE2_JSON)
+    assert result_stylish == \
+        generate_diff(PATH_FILE1_YML, PATH_FILE2_YML)
+
+    assert result_stylish == \
+        generate_diff(PATH_FILE1_JSON, PATH_FILE2_JSON, STYLISH)
+    assert result_stylish == \
+        generate_diff(PATH_FILE1_YML, PATH_FILE2_YML, STYLISH)
+
+    assert result_plain == \
+        generate_diff(PATH_FILE1_JSON, PATH_FILE2_JSON, PLAIN)
+    assert result_plain == \
+        generate_diff(PATH_FILE1_YML, PATH_FILE2_YML, PLAIN)
