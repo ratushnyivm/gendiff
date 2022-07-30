@@ -6,3 +6,10 @@
 ---
 
 # Gendiff - json/yaml difference generator
+
+bla bla bla
+
+---
+
+# Demonstration
+[![asciicast](https://asciinema.org/a/x9AZ1aUHJU9sJeP44CnOP25gY.svg)](https://asciinema.org/a/x9AZ1aUHJU9sJeP44CnOP25gY)
