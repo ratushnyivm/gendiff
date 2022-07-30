@@ -1,6 +1,11 @@
 import argparse
 
 
+STYLISH = 'stylish'
+PLAIN = 'plain'
+JSON = 'json'
+
+
 def parse_input():
     parser = argparse.ArgumentParser(
         description='Compares two configuration files and shows a difference.'
@@ -16,8 +21,8 @@ def parse_input():
     parser.add_argument(
         '-f', '--format',
         help='set format of output (default: "stylish")',
-        choices=['stylish', 'plain', 'json'],
-        default='stylish'
+        choices=[STYLISH, PLAIN, JSON],
+        default=STYLISH
     )
     args = parser.parse_args()
 
