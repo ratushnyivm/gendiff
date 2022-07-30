@@ -1,5 +1,8 @@
 from gendiff.gendiff import extract_data
 from gendiff import generate_diff  # noqa
+from gendiff.output_views.json import json_output
+from gendiff.output_views.plain import plain_output
+from gendiff.output_views.stylish import stylish_output
 
 
 STYLISH = 'stylish'
@@ -70,3 +73,9 @@ def test_generate_diff():
         generate_diff(PATH_FILE1_JSON, PATH_FILE2_JSON, PLAIN)
     assert result_plain == \
         generate_diff(PATH_FILE1_YML, PATH_FILE2_YML, PLAIN)
+
+
+def test_output_format():
+    assert type(json_output(extract_result)) == str
+    assert type(plain_output(extract_result)) == str
+    assert type(stylish_output(extract_data)) == str
