@@ -1,6 +1,17 @@
 from collections import OrderedDict
 
 
+STATUS = 'status'
+ADDED = 'added'
+DELETED = 'deleted'
+CHANGED = 'changed'
+
+VALUE = 'value'
+OLD_VALUE = 'old_value'
+NEW_VALUE = 'new_value'
+COMPLEX_VALUE = '[complex value]'
+
+
 def plain_output(file: dict):
     def iter_(value, path):
 
@@ -18,27 +29,27 @@ def plain_output(file: dict):
             new_path = path + f"{key}."
 
             if not isinstance(value, dict):
-                lines.append("[complex value]")
+                lines.append(COMPLEX_VALUE)
 
-            elif value.get('status') == 'changed' and value.get('value'):
+            elif value.get(STATUS) == CHANGED and value.get(VALUE):
                 lines.append(
-                    f"{(iter_(value.get('value'), new_path))}"
+                    f"{(iter_(value.get(VALUE), new_path))}"
                 )
 
-            elif value.get('status') == 'changed' and not value.get('value'):
+            elif value.get(STATUS) == CHANGED and not value.get(VALUE):
                 lines.append(
                     f"{path}{key}' was updated. "
-                    f"From {iter_(value.get('old_value'), path)} "
-                    f"to {iter_(value.get('new_value'), path)}"
+                    f"From {iter_(value.get(OLD_VALUE), path)} "
+                    f"to {iter_(value.get(NEW_VALUE), path)}"
                 )
 
-            elif value.get('status') == 'added':
+            elif value.get(STATUS) == ADDED:
                 lines.append(
                     f"{path}{key}' was added with value: "
-                    f"{iter_(value.get('value'), path)}"
+                    f"{iter_(value.get(VALUE), path)}"
                 )
 
-            elif value.get('status') == 'deleted':
+            elif value.get(STATUS) == DELETED:
                 lines.append(
                     f"{path}{key}' was removed"
                 )
@@ -48,6 +59,6 @@ def plain_output(file: dict):
 
         return result
 
-    preview = iter_(file, '')
+    pre_result = iter_(file, '')
 
-    return "Property '" + preview
+    return "Property '" + pre_result
