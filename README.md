@@ -8,7 +8,11 @@
 ---
 
 ## Description
-Gendiff - json/yaml difference generator
+"Gendiff" is a program that determines the difference between two data structures.  
+
+Features of the utility:
+* Supports different input formats: yaml (yml), json
+* Report generation as plain text, stylish and json
 
 ---
 
@@ -53,19 +57,37 @@ print(diff)
 <details>
   <summary>installation</summary>
     
-  [![asciicast](https://asciinema.org/a/LTGDQ0FKulquqcR4nOFHLKJAQ.svg)](https://asciinema.org/a/LTGDQ0FKulquqcR4nOFHLKJAQ)
+  [![asciicast](https://asciinema.org/a/xHt6q1X0X2URwYCatpP1HIrrk.svg)](https://asciinema.org/a/xHt6q1X0X2URwYCatpP1HIrrk)
 </details>
 
 <details>
-  <summary>brain_calc</summary>
+  <summary>stylish</summary>
     
-  ### win
-  [![asciicast](https://asciinema.org/a/wlH3YnemKkvupRP4Bk8SBgHlm.svg)](https://asciinema.org/a/wlH3YnemKkvupRP4Bk8SBgHlm)
-
-  ### loss
-  [![asciicast](https://asciinema.org/a/iSlmp2GNEEx3NOxPlGTAkwEkv.svg)](https://asciinema.org/a/iSlmp2GNEEx3NOxPlGTAkwEkv)
+  `gendiff path/to/file1 path/to/file2`  
+  `gendiff path/to/file1 path/to/file2 -f stylish`  
+  `gendiff path/to/file1 path/to/file2 --format stylish`  
+  
+  [![asciicast](https://asciinema.org/a/B6rfKW2tijgqN6OtvI5mhQXic.svg)](https://asciinema.org/a/B6rfKW2tijgqN6OtvI5mhQXic)
 </details>
 
+<details>
+  <summary>plain</summary>
+    
+  `gendiff path/to/file1 path/to/file2 -f plain`  
+  `gendiff path/to/file1 path/to/file2 --format plain`  
+  
+  [![asciicast](https://asciinema.org/a/MqsaUpAxjLWFlVutmqVsCwOLH.svg)](https://asciinema.org/a/MqsaUpAxjLWFlVutmqVsCwOLH)
+</details>
 
+<details>
+  <summary>json</summary>
+    
+  `gendiff path/to/file1 path/to/file2 -f json`  
+  `gendiff path/to/file1 path/to/file2 --format json`  
+  
+  [![asciicast](https://asciinema.org/a/aReCTWQHTiz3uFREkIgiaBmHf.svg)](https://asciinema.org/a/aReCTWQHTiz3uFREkIgiaBmHf)
+</details>
 
-[![asciicast](https://asciinema.org/a/x9AZ1aUHJU9sJeP44CnOP25gY.svg)](https://asciinema.org/a/x9AZ1aUHJU9sJeP44CnOP25gY)
+---
+
+The second training project from ["Python developer" course](https://ru.hexlet.io/programs/python)
