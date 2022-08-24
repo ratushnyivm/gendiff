@@ -21,8 +21,51 @@ Gendiff - json/yaml difference generator
 
 ## Usage
 
+### Cli-utility
+``` bash
+$ gendiff -h
+usage: gendiff [-h] [-f {stylish,plain,json}] first_file second_file
+
+Compares two configuration files and shows a difference.
+
+positional arguments:
+  first_file
+  second_file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f {stylish,plain,json}, --format {stylish,plain,json}
+                        set format of output (default: "stylish")
+```
+
+### Library
+``` python
+from gendiff import generate_diff
+
+diff = generate_diff(file_path1, file_path2)
+print(diff)
+```
 
 ---
 
 ## Demonstration
+
+<details>
+  <summary>installation</summary>
+    
+  [![asciicast](https://asciinema.org/a/LTGDQ0FKulquqcR4nOFHLKJAQ.svg)](https://asciinema.org/a/LTGDQ0FKulquqcR4nOFHLKJAQ)
+</details>
+
+<details>
+  <summary>brain_calc</summary>
+    
+  ### win
+  [![asciicast](https://asciinema.org/a/wlH3YnemKkvupRP4Bk8SBgHlm.svg)](https://asciinema.org/a/wlH3YnemKkvupRP4Bk8SBgHlm)
+
+  ### loss
+  [![asciicast](https://asciinema.org/a/iSlmp2GNEEx3NOxPlGTAkwEkv.svg)](https://asciinema.org/a/iSlmp2GNEEx3NOxPlGTAkwEkv)
+</details>
+
+
+
 [![asciicast](https://asciinema.org/a/x9AZ1aUHJU9sJeP44CnOP25gY.svg)](https://asciinema.org/a/x9AZ1aUHJU9sJeP44CnOP25gY)
