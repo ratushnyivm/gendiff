@@ -1,9 +1,9 @@
-from gendiff.gendiff import extract_data
 from gendiff import generate_diff  # noqa
+from gendiff.gendiff import extract_data, make_diff
 from gendiff.output_views.json import json_output
 from gendiff.output_views.plain import plain_output
 from gendiff.output_views.stylish import stylish_output
-
+from tests.fixtures.data import EXTRACT_RESULT, MAKE_DIFF_RESULT
 
 STYLISH = 'stylish'
 PLAIN = 'plain'
@@ -17,39 +17,10 @@ PATH_FILE2_YML = 'tests/fixtures/file2.yml'
 PATH_RESULT_STYLISH = 'tests/fixtures/result_stylish'
 PATH_RESULT_PLAIN = 'tests/fixtures/result_plain'
 
-extract_result = {
-    'common': {
-        'setting1': 'Value 1',
-        'setting2': 200,
-        'setting3': True,
-        'setting6': {
-            'key': 'value',
-            'doge': {
-                'wow': ''
-            }
-        }
-    },
-    'group1': {
-        'baz': 'bas',
-        'foo': 'bar',
-        'nest': {
-            'key': 'value'
-        }
-    },
-    'group2': {
-        'abc': 12345,
-        'deep': {
-            'id': 45
-        }
-    }
-}
-
 
 def test_extract_data():
-    assert type(extract_data(PATH_FILE1_JSON)) == dict
-    assert type(extract_data(PATH_FILE1_YML)) == dict
-    assert extract_data(PATH_FILE1_JSON) == extract_result
-    assert extract_data(PATH_FILE1_YML) == extract_result
+    assert extract_data(PATH_FILE1_JSON) == EXTRACT_RESULT
+    assert extract_data(PATH_FILE1_YML) == EXTRACT_RESULT
 
 
 def test_generate_diff():
@@ -76,6 +47,13 @@ def test_generate_diff():
 
 
 def test_output_format():
-    assert type(json_output(extract_result)) == str
-    assert type(plain_output(extract_result)) == str
+    assert type(json_output(EXTRACT_RESULT)) == str
+    assert type(plain_output(EXTRACT_RESULT)) == str
     assert type(stylish_output(extract_data)) == str
+
+def test_make_diff():
+    file1 = extract_data(PATH_FILE1_JSON)
+    file2 = extract_data(PATH_FILE2_JSON)
+
+    result = make_diff(file1, file2)
+    assert result == MAKE_DIFF_RESULT
