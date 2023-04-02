@@ -51,6 +51,7 @@ def test_output_format():
     assert type(plain_output(EXTRACT_RESULT)) == str
     assert type(stylish_output(extract_data)) == str
 
+
 def test_make_diff():
     file1 = extract_data(PATH_FILE1_JSON)
     file2 = extract_data(PATH_FILE2_JSON)

@@ -27,7 +27,7 @@ EXTRACT_RESULT = {
 
 MAKE_DIFF_RESULT = {
     'common': {
-        'status': 'changed', 
+        'status': 'changed',
         'value': {
             'setting4': {
                 'status': 'added',
