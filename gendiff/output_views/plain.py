@@ -1,6 +1,5 @@
 from collections import OrderedDict
 
-
 STATUS = 'status'
 ADDED = 'added'
 DELETED = 'deleted'

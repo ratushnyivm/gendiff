@@ -1,10 +1,10 @@
 import json
 import os
-import yaml
-from gendiff.output_views.stylish import stylish_output
-from gendiff.output_views.plain import plain_output
-from gendiff.output_views.json import json_output
 
+import yaml
+from gendiff.output_views.json import json_output
+from gendiff.output_views.plain import plain_output
+from gendiff.output_views.stylish import stylish_output
 
 STATUS = 'status'
 ADDED = 'added'

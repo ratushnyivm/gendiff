@@ -1,3 +1,5 @@
+<div align="center">
+
 # Gendiff
 
 [![Actions Status](https://github.com/ratushnyyvm/python-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/ratushnyyvm/python-project-lvl2/actions)
@@ -5,20 +7,25 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/80bb23f69bdce8f4bb02/maintainability)](https://codeclimate.com/github/ratushnyyvm/python-project-lvl2/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/80bb23f69bdce8f4bb02/test_coverage)](https://codeclimate.com/github/ratushnyyvm/python-project-lvl2/test_coverage)
 
+</div>
+
 ---
 
 ## Description
+
 "Gendiff" is a program that determines the difference between two data structures.  
 
 Features of the utility:
+
 * Supports different input formats: yaml (yml), json
 * Report generation as plain text, stylish and json
 
 ---
 
 ## Installation
-1. Clone the repository to your computer `git clone https://github.com/ratushnyyvm/python-project-lvl2.git`
-2. Go to the project folder `cd python-project-lvl2`
+
+1. Clone the repository to your computer `git clone https://github.com/ratushnyyvm/gendiff.git`
+2. Go to the project folder `cd gendiff`
 3. Install the program `make setup`
 
 ---
@@ -26,6 +33,7 @@ Features of the utility:
 ## Usage
 
 ### Cli-utility
+
 ``` bash
 $ gendiff -h
 usage: gendiff [-h] [-f {stylish,plain,json}] first_file second_file
@@ -43,6 +51,7 @@ optional arguments:
 ```
 
 ### Library
+
 ``` python
 from gendiff import generate_diff
 
@@ -87,7 +96,3 @@ print(diff)
   
   [![asciicast](https://asciinema.org/a/aReCTWQHTiz3uFREkIgiaBmHf.svg)](https://asciinema.org/a/aReCTWQHTiz3uFREkIgiaBmHf)
 </details>
-
----
-
-The second training project from ["Python developer" course](https://ru.hexlet.io/programs/python)

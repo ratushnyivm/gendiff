@@ -9,10 +9,10 @@ publish:
 
 package-install:
 	python3 -m pip uninstall hexlet-code -y
-	python3 -m pip install --user dist/*.whl
+	python3 -m pip install dist/*.whl
 
 package-reinstall:
-	python3 -m pip install --user dist/*.whl --force-reinstall
+	python3 -m pip install dist/*.whl --force-reinstall
 
 lint:
 	poetry run flake8 gendiff
@@ -21,7 +21,7 @@ test:
 	poetry run pytest
 
 test-cov:
-	poetry run pytest --cov
+	poetry run pytest --cov=gendiff
 
 test-coverage:
 	poetry run pytest --cov=gendiff --cov-report xml
