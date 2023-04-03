@@ -33,6 +33,8 @@ Features of the utility:
 
 ## Installation
 
+Before installation, make sure that you have [Poetry](https://python-poetry.org/) installed.
+
 1. Clone the repository to your computer `git clone https://github.com/ratushnyyvm/gendiff.git`
 2. Go to the project folder `cd gendiff`
 3. Install the program `make setup`
