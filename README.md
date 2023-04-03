@@ -4,8 +4,8 @@
 
 [![hexlet-check](https://github.com/ratushnyyvm/gendiff/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/ratushnyyvm/gendiff/actions/workflows/hexlet-check.yml)
 [![lint and test](https://github.com/ratushnyyvm/gendiff/actions/workflows/gendiff-CI.yml/badge.svg)](https://github.com/ratushnyyvm/gendiff/actions/workflows/gendiff-CI.yml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/80bb23f69bdce8f4bb02/maintainability)](https://codeclimate.com/github/ratushnyyvm/python-project-lvl2/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/80bb23f69bdce8f4bb02/test_coverage)](https://codeclimate.com/github/ratushnyyvm/python-project-lvl2/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3fa49b4f132527790658/maintainability)](https://codeclimate.com/github/ratushnyyvm/gendiff/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/3fa49b4f132527790658/test_coverage)](https://codeclimate.com/github/ratushnyyvm/gendiff/test_coverage)
 
 </div>
 
@@ -19,6 +19,15 @@ Features of the utility:
 
 * Supports different input formats: yaml (yml), json
 * Report generation as plain text, stylish and json
+
+---
+
+## Dependencies
+
+| Tool       | Version         |
+|------------|-----------------|
+| python     | "^3.8.1"        |
+| PyYAML     | "^6.0"          |
 
 ---
 
