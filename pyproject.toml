@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "gendiff"
+name = "hexlet-code"
 version = "0.2.0"
 description = "The second training project from Python developer course"
 authors = ["ratushnyyvm <ratushnyyvm@gmail.com>"]
